@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {appColors} from '../constants/appColors';
 import {globalStyles} from '../styles/globalStyles';
 
@@ -55,8 +56,12 @@ const InputComponent = (props: Props) => {
             ? () => setIsShowPassword(!isShowPassword)
             : () => onChange('')
         }>
-        {isPassword ? (
-          <EyeSlash size={22} color={appColors.gray} />
+        {value.length > 0 && isPassword ? (
+          <FontAwesome
+            name={isShowPassword ? 'eye' : 'eye-slash'}
+            size={22}
+            color={appColors.gray}
+          />
         ) : (
           value.length > 0 &&
           allowClear && (
@@ -81,6 +86,8 @@ const styles = StyleSheet.create({
     width: '100%',
     minHeight: 56,
     paddingHorizontal: 15,
+    backgroundColor: appColors.white,
+    marginBottom: 19,
   },
   input: {
     padding: 0,

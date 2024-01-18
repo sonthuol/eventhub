@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import {View} from 'react-native';
 import {globalStyles} from '../../styles/globalStyles';
 import {InputComponent} from '../../components';
-import {Sms} from 'iconsax-react-native';
+import {Lock, Sms} from 'iconsax-react-native';
 import {appColors} from '../../constants/appColors';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <View
@@ -21,6 +22,14 @@ const LoginScreen = () => {
         allowClear
         affix={<Sms size={22} color={appColors.gray} />}
         type="email-address"
+      />
+      <InputComponent
+        value={password}
+        placeholder="Password"
+        onChange={val => setPassword(val)}
+        allowClear
+        isPassword
+        affix={<Lock size={22} color={appColors.gray} />}
       />
     </View>
   );
