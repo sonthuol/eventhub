@@ -7,10 +7,10 @@ interface Props {
   styles?: StyleProp<ViewStyle>;
 }
 
-const SectionCompoent = (props: Props) => {
+const SectionComponent = (props: Props) => {
   const {children, styles} = props;
 
   return <View style={[globalStyles.section, styles]}>{children}</View>;
 };
 
-export default SectionCompoent;
+export default SectionComponent;

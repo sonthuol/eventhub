@@ -6,21 +6,21 @@ import {
   ContainerComponent,
   InputComponent,
   RowComponent,
-  SectionCompoent,
+  SectionComponent,
   SpaceComponent,
   TextComponent,
 } from '../../components';
 import {appColors} from '../../constants/appColors';
 import SociaLogin from './components/SociaLogin';
 
-const LoginScreen = () => {
+const SignInScreen = ({navigation}: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRemember, setIsRemember] = useState(false);
 
   return (
     <ContainerComponent isImageBackground isScroll>
-      <SectionCompoent
+      <SectionComponent
         styles={{
           marginTop: 75,
           justifyContent: 'center',
@@ -34,8 +34,8 @@ const LoginScreen = () => {
             marginBottom: 30,
           }}
         />
-      </SectionCompoent>
-      <SectionCompoent>
+      </SectionComponent>
+      <SectionComponent>
         <TextComponent title text="Sign in" />
         <SpaceComponent height={21} />
         <InputComponent
@@ -71,20 +71,24 @@ const LoginScreen = () => {
             type="text"
           />
         </RowComponent>
-      </SectionCompoent>
+      </SectionComponent>
       <SpaceComponent height={16} />
-      <SectionCompoent>
+      <SectionComponent styles={{alignItems: 'center'}}>
         <ButtonComponent type="primary" text="SIGN IN" />
-      </SectionCompoent>
+      </SectionComponent>
       <SociaLogin />
-      <SectionCompoent>
+      <SectionComponent>
         <RowComponent justify="center">
           <TextComponent text="Dont't have an account?" />
-          <ButtonComponent type="link" text="Sign up" />
+          <ButtonComponent
+            type="link"
+            text="Sign up"
+            onPress={() => navigation.navigate('SignUpScreen')}
+          />
         </RowComponent>
-      </SectionCompoent>
+      </SectionComponent>
     </ContainerComponent>
   );
 };
 
-export default LoginScreen;
+export default SignInScreen;

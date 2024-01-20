@@ -60,7 +60,7 @@ const OnboardingScreen = ({navigation}: any) => {
             alignItems: 'center',
           },
         ]}>
-        <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
+        <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
           <TextComponent
             text="Skip"
             color={appColors.gray2}
@@ -69,7 +69,9 @@ const OnboardingScreen = ({navigation}: any) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            index < 2 ? setIndex(index + 1) : navigation.navigate('LoginScreen')
+            index < 2
+              ? setIndex(index + 1)
+              : navigation.navigate('SignInScreen')
           }>
           <TextComponent
             text="Next"

@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   ButtonComponent,
-  SectionCompoent,
+  SectionComponent,
   SpaceComponent,
   TextComponent,
 } from '../../../components';
@@ -11,7 +11,7 @@ import {Image} from 'react-native';
 
 const SociaLogin = () => {
   return (
-    <SectionCompoent>
+    <SectionComponent styles={{alignItems: 'center'}}>
       <TextComponent
         style={{textAlign: 'center'}}
         text="OR"
@@ -48,7 +48,7 @@ const SociaLogin = () => {
         textFont={fontFamilies.regular}
         iconFlex="left"
       />
-    </SectionCompoent>
+    </SectionComponent>
   );
 };
 
