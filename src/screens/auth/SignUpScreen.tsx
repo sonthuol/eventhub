@@ -69,6 +69,7 @@ const SignUpScreen = ({navigation}: any) => {
       <SpaceComponent height={16} />
       <SectionComponent>
         <ButtonComponent
+          onPress={() => navigation.navigate('VerificationScreen')}
           type="primary"
           text="SIGN UP"
           icon={

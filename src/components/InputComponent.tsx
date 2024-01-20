@@ -1,11 +1,12 @@
-import {EyeSlash} from 'iconsax-react-native';
 import React, {ReactNode, useState} from 'react';
 import {
   KeyboardType,
+  StyleProp,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
+  ViewStyle,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -20,6 +21,7 @@ interface Props {
   isPassword?: boolean;
   allowClear?: boolean;
   type?: KeyboardType;
+  styles?: StyleProp<ViewStyle>;
   onChange: (val: string) => void;
 }
 
@@ -32,16 +34,17 @@ const InputComponent = (props: Props) => {
     isPassword,
     allowClear,
     type,
+    styles,
     onChange,
   } = props;
 
   const [isShowPassword, setIsShowPassword] = useState(isPassword ?? false);
 
   return (
-    <View style={[styles.inputContainer]}>
+    <View style={[localStyles.inputContainer, styles]}>
       {affix ?? affix}
       <TextInput
-        style={[styles.input, globalStyles.text]}
+        style={[localStyles.input, globalStyles.text]}
         value={value}
         placeholder={placeholder ?? ''}
         onChangeText={val => onChange(val)}
@@ -75,7 +78,7 @@ const InputComponent = (props: Props) => {
 
 export default InputComponent;
 
-const styles = StyleSheet.create({
+const localStyles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
