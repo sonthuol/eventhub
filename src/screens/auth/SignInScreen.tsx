@@ -67,19 +67,29 @@ const SignInScreen = ({navigation}: any) => {
           </RowComponent>
           <ButtonComponent
             text="Forgot password?"
-            onPress={() => {}}
+            onPress={() => navigation.navigate('RessetPasswordScreen')}
             type="text"
           />
         </RowComponent>
       </SectionComponent>
       <SpaceComponent height={16} />
-      <SectionComponent styles={{alignItems: 'center'}}>
-        <ButtonComponent type="primary" text="SIGN IN" />
+      <SectionComponent>
+        <ButtonComponent
+          type="primary"
+          text="SIGN IN"
+          icon={
+            <Image
+              source={require('../../assets/images/ArrowRight.png')}
+              style={{width: 26, height: 26}}
+            />
+          }
+          iconFlex="right"
+        />
       </SectionComponent>
       <SociaLogin />
       <SectionComponent>
         <RowComponent justify="center">
-          <TextComponent text="Dont't have an account?" />
+          <TextComponent text="Dont't have an account? " />
           <ButtonComponent
             type="link"
             text="Sign up"

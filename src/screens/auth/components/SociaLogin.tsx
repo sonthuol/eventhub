@@ -11,7 +11,7 @@ import {Image} from 'react-native';
 
 const SociaLogin = () => {
   return (
-    <SectionComponent styles={{alignItems: 'center'}}>
+    <SectionComponent>
       <TextComponent
         style={{textAlign: 'center'}}
         text="OR"

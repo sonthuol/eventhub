@@ -11,6 +11,7 @@ import {
 } from '../../components';
 import {appColors} from '../../constants/appColors';
 import SociaLogin from './components/SociaLogin';
+import {Image} from 'react-native';
 
 const initValue = {
   username: '',
@@ -66,8 +67,18 @@ const SignUpScreen = ({navigation}: any) => {
         />
       </SectionComponent>
       <SpaceComponent height={16} />
-      <SectionComponent styles={{alignItems: 'center'}}>
-        <ButtonComponent type="primary" text="SIGN UP" />
+      <SectionComponent>
+        <ButtonComponent
+          type="primary"
+          text="SIGN UP"
+          icon={
+            <Image
+              source={require('../../assets/images/ArrowRight.png')}
+              style={{width: 26, height: 26}}
+            />
+          }
+          iconFlex="right"
+        />
       </SectionComponent>
       <SociaLogin />
       <SectionComponent>
