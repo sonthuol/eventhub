@@ -5,4 +5,5 @@ export const appInfos = {
     WIDTH: Dimensions.get('window').width,
     HEIGHT: Dimensions.get('window').height,
   },
+  baseUrl: 'http://localhost:3001',
 };

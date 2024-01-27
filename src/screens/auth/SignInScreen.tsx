@@ -12,11 +12,21 @@ import {
 } from '../../components';
 import {appColors} from '../../constants/appColors';
 import SociaLogin from './components/SociaLogin';
+import authenticationApi from '../../apis/authApi';
 
 const SignInScreen = ({navigation}: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRemember, setIsRemember] = useState(false);
+
+  const handleLogin = async () => {
+    try {
+      const res = await authenticationApi.HandleAuthentication('/hello');
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <ContainerComponent isImageBackground isScroll>
@@ -75,6 +85,7 @@ const SignInScreen = ({navigation}: any) => {
       <SpaceComponent height={16} />
       <SectionComponent>
         <ButtonComponent
+          onPress={handleLogin}
           type="primary"
           text="SIGN IN"
           icon={
