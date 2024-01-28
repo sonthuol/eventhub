@@ -1,6 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Lock, Sms} from 'iconsax-react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, Switch} from 'react-native';
+import {useDispatch} from 'react-redux';
+import authenticationApi from '../../apis/authApi';
 import {
   ButtonComponent,
   ContainerComponent,
@@ -11,18 +14,67 @@ import {
   TextComponent,
 } from '../../components';
 import {appColors} from '../../constants/appColors';
+import {addAuth} from '../../reduxs/reducers/authReducer';
+import {Validate} from '../../utils/Validate';
 import SociaLogin from './components/SociaLogin';
-import authenticationApi from '../../apis/authApi';
 
 const SignInScreen = ({navigation}: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorText, setErrorText] = useState('');
   const [isRemember, setIsRemember] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    checkUserEixst();
+  }, []);
+
+  useEffect(() => {
+    if (email || password) {
+      setErrorText('');
+    }
+  }, [email, password]);
+
+  const checkUserEixst = async () => {
+    const res = await AsyncStorage.getItem('auth');
+    if (res) {
+      setEmail(JSON.parse(res).email);
+      setIsRemember(JSON.parse(res).isRemember);
+    }
+  };
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      setErrorText('Yêu cầu nhập đầy đủ thông tin');
+      return;
+    }
+
+    if (!Validate.Email(email)) {
+      setErrorText('Email không hợp lệ');
+      return;
+    }
+
+    if (!Validate.Password(password)) {
+      setErrorText('Mật khẩu phải chứa 6 kí tự trên');
+      return;
+    }
+
     try {
-      const res = await authenticationApi.HandleAuthentication('/hello');
-      console.log(res);
+      const res = await authenticationApi.HandleAuthentication(
+        '/login',
+        'POST',
+        {
+          email,
+          password,
+        },
+      );
+
+      dispatch(addAuth({...res.data, isRemember: isRemember}));
+      await AsyncStorage.setItem(
+        'auth',
+        isRemember
+          ? JSON.stringify({...res.data, isRemember: isRemember})
+          : email,
+      );
     } catch (error) {
       console.log(error);
     }
@@ -64,6 +116,10 @@ const SignInScreen = ({navigation}: any) => {
           isPassword
           affix={<Lock size={22} color={appColors.gray} />}
         />
+        {errorText && (
+          <TextComponent text={errorText} color={appColors.darger} />
+        )}
+        <SpaceComponent height={10} />
         <RowComponent justify="space-between">
           <RowComponent onPress={() => setIsRemember(!isRemember)}>
             <Switch

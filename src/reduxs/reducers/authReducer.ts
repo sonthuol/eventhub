@@ -4,12 +4,14 @@ interface AuthState {
   id: string;
   email: string;
   accesstoken: string;
+  isRemember: boolean;
 }
 
 const initialState: AuthState = {
   id: '',
   email: '',
   accesstoken: '',
+  isRemember: false,
 };
 
 const authSlice = createSlice({

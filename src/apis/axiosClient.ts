@@ -27,7 +27,6 @@ axiosClient.interceptors.response.use(
     throw new Error('Error');
   },
   error => {
-    console.log(`Error api: ${JSON.stringify(error)}`);
     throw new Error(error.response);
   },
 );
