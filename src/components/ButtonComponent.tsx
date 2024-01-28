@@ -10,6 +10,7 @@ import React, {ReactNode} from 'react';
 import {TextComponent} from '.';
 import {globalStyles} from '../styles/globalStyles';
 import {appColors} from '../constants/appColors';
+import {fontFamilies} from '../constants/fontFamilies';
 
 interface Props {
   icon?: ReactNode;
@@ -19,7 +20,8 @@ interface Props {
   styles?: StyleProp<ViewStyle>;
   textColor?: string;
   textStyle?: StyleProp<TextStyle>;
-  iconFlex?: 'rirght' | 'left';
+  iconFlex?: 'right' | 'left';
+  textFont?: string;
   onPress?: () => void;
 }
 
@@ -33,28 +35,38 @@ const ButtonComponent = (props: Props) => {
     textColor,
     textStyle,
     iconFlex,
+    textFont,
     onPress,
   } = props;
 
   return type === 'primary' ? (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[
-        globalStyles.button,
-        {
-          backgroundColor: color ?? appColors.primary,
-        },
-        styles,
-      ]}>
-      {icon && icon}
-      <TextComponent
-        text={text}
-        color={textColor ?? appColors.white}
-        style={[textStyle, {marginLeft: icon ? 12 : 0}]}
-        flex={icon && iconFlex === 'rirght' ? 1 : 0}
-      />
-      {icon && iconFlex === 'rirght' && icon}
-    </TouchableOpacity>
+    <View style={{alignItems: 'center'}}>
+      <TouchableOpacity
+        onPress={onPress}
+        style={[
+          globalStyles.button,
+          globalStyles.shadow,
+          {
+            backgroundColor: color ?? appColors.primary,
+            marginBottom: 17,
+            width: '90%',
+          },
+          styles,
+        ]}>
+        {icon && iconFlex === 'left' && icon}
+        <TextComponent
+          text={text}
+          color={textColor ?? appColors.white}
+          style={[
+            textStyle,
+            {marginLeft: icon ? 12 : 0, fontSize: 16, textAlign: 'center'},
+          ]}
+          flex={icon && iconFlex === 'right' ? 1 : 0}
+          font={textFont ?? fontFamilies.medium}
+        />
+        {icon && iconFlex === 'right' && icon}
+      </TouchableOpacity>
+    </View>
   ) : (
     <TouchableOpacity onPress={onPress}>
       <TextComponent
